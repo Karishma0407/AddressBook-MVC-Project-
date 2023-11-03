@@ -19,6 +19,11 @@ namespace AddressBookDB
         }
 
         //Start Method Development
+        public IQueryable<userType> GetUserType()
+        {
+            return _Ctx.Context.userTypes;
+        }
+
         public IQueryable<user> GetUsers()
         {
             return _Ctx.Context.users;

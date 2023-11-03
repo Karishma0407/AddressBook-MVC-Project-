@@ -1,4 +1,5 @@
 ﻿using AddressBook.Models;
+using AddressBookDB;
 using AddressBookDB.Interface;
 using AddressBookDB.Model;
 using System;
@@ -19,20 +20,25 @@ namespace AddressBook.Controllers
             _Repo = Repo;
             _ModelMapping = ModelMapping;
         }
+
+        public HomeController()
+        {
+        }
+
         public ActionResult Index()
         {
             SelectLists ddlFilter = new SelectLists();
-            ddlFilter.UserList = new SelectList((from a in _Repo.GetUsers()
+            ddlFilter.UserList = new SelectList((from a in _Repo.GetUserType()
                                                   select new
                                                   {
-                                                      Value = a.userId,
-                                                      Text = a.userType.Trim()
+                                                      Value = a.typeId,
+                                                      Text = a.type.Trim()
                                                   }).Distinct(), "Value", "Text");
             return View(ddlFilter);
         }
 
         [HttpGet]
-        public ActionResult GetUser(int pageIndex, int pageSize, string sortField = "Id", string sortOrder = "desc")
+        public ActionResult GetUser(int pageIndex, int pageSize, string sortField = "Id", string sortOrder = "desc", int userType = 0)
         {
             IEnumerable<AddressBookDB.user> UserList = null;
             IQueryable<AddressBookDB.user> Query = null;
@@ -47,12 +53,17 @@ namespace AddressBook.Controllers
             {
                 using (_Repo)
                 {
+                    //To get all the data
                     Query = _Repo.GetUsers();
+
+                    // Filter the data based on the selected user type (userType)
+                    //Query = _Repo.GetUsers().Where(u => u.userType.typeId == userType);
+                    
                     itemsCount = Query.Count();
 
                     switch (sortField)
                     {
-                        case "FirstName":
+                        case "firstName":
                             if(sortOrder == "asc")
                             {
                                 UserList = Query.OrderBy(S => S.firstName);
@@ -62,7 +73,7 @@ namespace AddressBook.Controllers
                                 UserList = Query.OrderByDescending(S => S.firstName);
                             }
                             break;
-                        case "LastName":
+                        case "lastName":
                             if (sortOrder == "asc")
                             {
                                 UserList = Query.OrderBy(S => S.lastName);

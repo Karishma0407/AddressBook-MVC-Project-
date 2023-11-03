@@ -26,7 +26,7 @@
                     <div class="form-group">
                         <div class="col-sm-4">
                             <h2>Getting Users</h2>
-                            @Html.DropDownList("user", Model.UserList, new { @class = "form-control" })
+                            @Html.DropDownList("user", Model.UserList, new { @class = "form-control", id = "user" })
                         </div>
                     </div>
                 </div>
@@ -86,7 +86,15 @@
         }
         var GridManager = {
             Refresh: function () {
-                debugger;
+
+                // Get the selected user type from the dropdown
+                var userType = $('#user').val(); // Assuming your dropdown has an ID of 'user'
+
+                // Include the user type in the filter object
+                FormParams.userType = userType;
+
+                // Refresh the grid using the updated filter
+                //debugger;
                 $("#gridUser").jsGrid("search", FormParams.GridFiler)
             },
             Update: function () {
@@ -135,5 +143,6 @@
                 }
 
             });
+
     </script>
 }

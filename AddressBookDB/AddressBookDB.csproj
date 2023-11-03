@@ -53,53 +53,54 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Interface\IUserRepository.cs" />
-    <Compile Include="ModelEmployee.Context.cs">
+    <Compile Include="ModelUser.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelEmployee.Context.tt</DependentUpon>
+      <DependentUpon>ModelUser.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="ModelEmployee.cs">
+    <Compile Include="ModelUser.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelEmployee.tt</DependentUpon>
+      <DependentUpon>ModelUser.tt</DependentUpon>
     </Compile>
-    <Compile Include="ModelEmployee.Designer.cs">
+    <Compile Include="ModelUser.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelEmployee.edmx</DependentUpon>
+      <DependentUpon>ModelUser.edmx</DependentUpon>
     </Compile>
     <Compile Include="Model\ModelMapping.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="user.cs">
-      <DependentUpon>ModelEmployee.tt</DependentUpon>
+      <DependentUpon>ModelUser.tt</DependentUpon>
     </Compile>
     <Compile Include="UserContext.cs" />
     <Compile Include="UserRepository.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EntityDeploy Include="ModelEmployee.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ModelEmployee.Designer.cs</LastGenOutput>
-    </EntityDeploy>
+    <Compile Include="userType.cs">
+      <DependentUpon>ModelUser.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
-    <None Include="ModelEmployee.edmx.diagram">
-      <DependentUpon>ModelEmployee.edmx</DependentUpon>
+    <EntityDeploy Include="ModelUser.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModelUser.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="ModelUser.edmx.diagram">
+      <DependentUpon>ModelUser.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ModelEmployee.Context.tt">
+    <Content Include="ModelUser.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ModelEmployee.Context.cs</LastGenOutput>
-      <DependentUpon>ModelEmployee.edmx</DependentUpon>
+      <DependentUpon>ModelUser.edmx</DependentUpon>
+      <LastGenOutput>ModelUser.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="ModelEmployee.tt">
+    <Content Include="ModelUser.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModelEmployee.edmx</DependentUpon>
-      <LastGenOutput>ModelEmployee.cs</LastGenOutput>
+      <DependentUpon>ModelUser.edmx</DependentUpon>
+      <LastGenOutput>ModelUser.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

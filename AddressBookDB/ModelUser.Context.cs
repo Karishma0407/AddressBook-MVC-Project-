@@ -13,10 +13,10 @@ namespace AddressBookDB
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class AddressBookDBEntities : DbContext
+    public partial class AddressBookDBEntities1 : DbContext
     {
-        public AddressBookDBEntities()
-            : base("name=AddressBookDBEntities")
+        public AddressBookDBEntities1()
+            : base("name=AddressBookDBEntities1")
         {
         }
     
@@ -26,5 +26,6 @@ namespace AddressBookDB
         }
     
         public DbSet<user> users { get; set; }
+        public DbSet<userType> userTypes { get; set; }
     }
 }

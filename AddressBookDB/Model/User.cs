@@ -15,6 +15,7 @@ namespace AddressBookDB.Model
         public string fullName { get; set; }
 
         public string address { get; set; }
-        public string userType { get; set; }
+        public Nullable<int> typeId { get; set; }
+
     }
 }

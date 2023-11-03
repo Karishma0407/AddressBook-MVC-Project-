@@ -9,3 +9,14 @@ C:\Users\karis\source\repos\AddressBook\AddressBookDB\obj\Debug\AddressBookDB.dl
 C:\Users\karis\source\repos\AddressBook\AddressBookDB\obj\Debug\AddressBookDB.pdb
 C:\Users\karis\source\repos\AddressBook\AddressBookDB\bin\Debug\Microsoft.Web.Mvc.dll
 C:\Users\karis\source\repos\AddressBook\AddressBookDB\obj\Debug\AddressBookDB.csproj.AssemblyReference.cache
+C:\Users\karis\source\repos\AddressBook-MVC-Project\AddressBookDB\obj\Debug\AddressBookDB.csproj.AssemblyReference.cache
+C:\Users\karis\source\repos\AddressBook-MVC-Project\AddressBookDB\obj\Debug\AddressBookDB.csproj.CoreCompileInputs.cache
+C:\Users\karis\source\repos\AddressBook-MVC-Project\AddressBookDB\obj\Debug\AddressBookDB.dll
+C:\Users\karis\source\repos\AddressBook-MVC-Project\AddressBookDB\obj\Debug\AddressBookDB.pdb
+C:\Users\karis\source\repos\AddressBook-MVC-Project\AddressBookDB\bin\Debug\AddressBookDB.dll.config
+C:\Users\karis\source\repos\AddressBook-MVC-Project\AddressBookDB\bin\Debug\AddressBookDB.dll
+C:\Users\karis\source\repos\AddressBook-MVC-Project\AddressBookDB\bin\Debug\AddressBookDB.pdb
+C:\Users\karis\source\repos\AddressBook-MVC-Project\AddressBookDB\bin\Debug\EntityFramework.dll
+C:\Users\karis\source\repos\AddressBook-MVC-Project\AddressBookDB\bin\Debug\Microsoft.Web.Mvc.dll
+C:\Users\karis\source\repos\AddressBook-MVC-Project\AddressBookDB\bin\Debug\EntityFramework.xml
+C:\Users\karis\source\repos\AddressBook-MVC-Project\AddressBookDB\obj\Debug\AddressBookDB.csproj.CopyComplete

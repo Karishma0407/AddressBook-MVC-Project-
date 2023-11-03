@@ -12,14 +12,16 @@ namespace AddressBookDB
     using System;
     using System.Collections.Generic;
     
-    public partial class user
+    public partial class userType
     {
-        public int userId { get; set; }
-        public string firstName { get; set; }
-        public string lastName { get; set; }
-        public string address { get; set; }
-        public Nullable<int> typeId { get; set; }
+        public userType()
+        {
+            this.users = new HashSet<user>();
+        }
     
-        public virtual userType userType { get; set; }
+        public int typeId { get; set; }
+        public string type { get; set; }
+    
+        public virtual ICollection<user> users { get; set; }
     }
 }

@@ -8,14 +8,14 @@ namespace AddressBookDB
 {
     public class UserContext
     {
-        AddressBookDBEntities _Ctx;
+        AddressBookDBEntities1 _Ctx;
 
         public UserContext()
         {
-            _Ctx = new AddressBookDBEntities();
+            _Ctx = new AddressBookDBEntities1();
         }
 
-        public AddressBookDBEntities Context
+        public AddressBookDBEntities1 Context
         {
             get
             {

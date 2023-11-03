@@ -28,7 +28,7 @@ namespace AddressBookDB.Model
                 userId = usr.userId,
                 fullName = usr.firstName.Trim() + " " + usr.lastName.Trim(),
                 address = usr.address,
-                userType = usr.userType
+                typeId = usr.typeId
             };
         }
     }
