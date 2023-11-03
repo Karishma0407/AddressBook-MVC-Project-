@@ -1,0 +1,40 @@
+﻿.jsgrid-header-row > .jsgrid-header-cell
+{
+    background-color:#2e6da4;
+    color:white
+}
+
+.edit-icon,.delete-icon,.update-icon,.cancel-icon
+{
+    font-size:20px;
+}
+.edit-icon:hover,.update-icon:hover,.cancel-icon:hover
+{
+    color:#2e6da4;
+    cursor:pointer;
+}
+.delete-icon:hover
+{
+    color:red;
+    cursor:pointer;
+
+}
+
+
+.jsgrid-grid-body
+{
+    overflow-y:visible
+}
+.jsgrid-grid-header
+{
+    overflow-y:visible
+}
+#jsGrid
+{
+    display:none
+}
+.jsgrid-header-sort:before{
+    margin-right: 10px;
+    margin-top: 5px;
+}
+    
