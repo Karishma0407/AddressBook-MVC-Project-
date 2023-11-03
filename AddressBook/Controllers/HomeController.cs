@@ -26,11 +26,82 @@ namespace AddressBook.Controllers
                                                   select new
                                                   {
                                                       Value = a.userId,
-                                                      Text = a.firstName.Trim() + "" + a.lastName.Trim()
+                                                      Text = a.userType.Trim()
                                                   }).Distinct(), "Value", "Text");
             return View(ddlFilter);
         }
 
+        [HttpGet]
+        public ActionResult GetUser(int pageIndex, int pageSize, string sortField = "Id", string sortOrder = "desc")
+        {
+            IEnumerable<AddressBookDB.user> UserList = null;
+            IQueryable<AddressBookDB.user> Query = null;
+            IEnumerable<AddressBookDB.Model.User> ResultList = null;
+
+            int itemsCount = 0;
+            var param = sortField;
+            var propertyInfo = typeof(AddressBookDB.user).GetProperty(param);
+            int skip = (pageIndex - 1) * pageSize;
+
+            try
+            {
+                using (_Repo)
+                {
+                    Query = _Repo.GetUsers();
+                    itemsCount = Query.Count();
+
+                    switch (sortField)
+                    {
+                        case "FirstName":
+                            if(sortOrder == "asc")
+                            {
+                                UserList = Query.OrderBy(S => S.firstName);
+                            }
+                            else if(sortOrder == "desc")
+                            {
+                                UserList = Query.OrderByDescending(S => S.firstName);
+                            }
+                            break;
+                        case "LastName":
+                            if (sortOrder == "asc")
+                            {
+                                UserList = Query.OrderBy(S => S.lastName);
+                            }
+                            else if (sortOrder == "desc")
+                            {
+                                UserList = Query.OrderByDescending(S => S.lastName);
+                            }
+                            break;
+
+                        default:
+                            UserList = Query.OrderBy(S => S.userId);
+                            break;
+                    }
+
+                    ResultList = UserList.Skip(skip)
+                        .Take(pageSize).ToList().ToList()
+                        .Select(T => _ModelMapping.LoadUser(T));
+
+                    var res = UserList.GroupBy(x => x.userId).Select(y => y.First());
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            var Result = new { data = ResultList, itemsCount = itemsCount };
+            if(Result == null)
+            {
+                //
+            }
+            return Json(Result, JsonRequestBehavior.AllowGet);
+        }
+        public class ResultNames
+        {
+            public int Id { get; set; }
+            public string Value { get; set; }
+        }
 
         public ActionResult About()
         {

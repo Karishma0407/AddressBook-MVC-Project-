@@ -1,31 +1,139 @@
-﻿@{
+﻿@model AddressBook.Models.SelectLists
+@{
     ViewBag.Title = "Home Page";
 }
+@using (Html.BeginForm())
+{
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+    <div class="jumbotron">
+        <h1>Vanier Address Book</h1>
+        <p class="lead">This page will show you the details of vanier students and teachers.</p>
+        <p><a href="https://www.vaniercollege.qc.ca/" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    </div>
+    <!--
+        <div class="row">
+            <div class="col-md-4">
+                <h2>Getting Users</h2>
+            </div>
+        </div>
+    -->
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading"></div>
+            <div class="panel-body">
+                <!--Get the Users-->
+                <div class="form-horizontal" id="freeze">
+                    <div class="form-group">
+                        <div class="col-sm-4">
+                            <h2>Getting Users</h2>
+                            @Html.DropDownList("user", Model.UserList, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <!--Search section-->
+                <div class="form-horizontal" id="freeze">
+                    <div class="form-group">
+                        <div class="col-sm-8">
+                            <input id="Term" class="form-control autocomplete" type="text" />
+                        </div>
+                        <div class="col-sm-2">
+                            <button id="btnSearch" type="button" class="btn btn-primary pull-right">
+                                Search <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            <div id="gridalerts"></div>
+            <div id="gridUser"></div>
+        </div>
+    </div>
+}
+@section scripts
+{
+    <script type="text/javascript">
+        debugger;
+        $('.autocomplete').autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: '@Url.Action("SearchUser","Home")',
+                    type: 'POST',
+                    dataType: "Json",
+                    data: {
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+                        term: request.term
+                    },
+                    success: function (data) {
+                        debugger;
+                        response(data)
+                    }
+                })
+            }
+        });
+        debugger;
+        var FormParams = {
+
+            term: $('#Term').val(),
+            GridFiler: function () {
+                return {
+                    term: $('#Term').val()
+                }
+            }
+        }
+        var GridManager = {
+            Refresh: function () {
+                debugger;
+                $("#gridUser").jsGrid("search", FormParams.GridFiler)
+            },
+            Update: function () {
+                //TODO
+            }
+        }
+        $("#gridUser").jsGrid({
+                // self: this,
+                width: "100%",
+                height: "auto",
+                autoload: true,
+                pageLoading: true,
+                editing: true,
+                filtering: false,
+                sorting: true,
+                paging: true,
+                pageSize: 30,
+                pageButtonCount: 3,
+                pageNextText: ">",
+                pageLastText: ">>",
+                pagePrevText: "<",
+                pageFirstText: "<<",
+                fields: [
+                    { title: "First Name", name: "firstName", type: "input", width: 50 },
+                    { title: "Last Name", name: "lastName",type:"input", width: 50 },
+                    { title: "Address", name: "address", type: "input", width: 50 }
+                ],
+                controller: {
+                    loadData: function (filter) {
+
+                        //filter["Id"] = 0;
+                        //filter["occupation"] = "";
+
+                        var d = $.Deferred();
+
+                        return $.ajax({
+                            url: '@Url.Action("GetUser", "Home")',
+                            type: 'GET',
+                            dataType: "JSON",
+                            data: filter
+
+                        }).done(function (response) {
+                            d.resolve(response);
+                        })
+                    }
+                }
+
+            });
+    </script>
+}
